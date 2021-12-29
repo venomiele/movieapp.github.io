@@ -381,7 +381,8 @@ overflow-y:scroll;
    }
 
    .box {
-       width: 90%;
+       width: 100%;
+       height: auto;
    }
 }
 
@@ -416,7 +417,7 @@ overflow-y:scroll;
         background-position: center;
     }
     .movie-description {
-        font-size: 0.25rem;
+        font-size: 0.3rem;
         padding: 0.25rem;
     }
     .movie {
@@ -437,7 +438,7 @@ overflow-y:scroll;
         padding: 0.25rem;
     }
     .movie-name {
-        font-size: 0.3rem;
+        font-size: 0.5rem;
         padding: 0.25rem;
     }
 
@@ -472,5 +473,10 @@ overflow-y:scroll;
         .btn {
             font-size: 0.75rem;
         }
+.box {
+    width: 100%;
+    height: auto;
+}
+
     }
 
