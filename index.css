@@ -228,9 +228,9 @@ align-items: center;
     padding: 0.25rem 0.5rem;
 }
 
-
 .preview {
     color: red;
+    text-shadow: 0.5px 0.5px white;
 }
 
 /* Media queries */
@@ -415,19 +415,21 @@ overflow-y:scroll;
 
 }
 
+/*WORK HERE CURRENTLY ON MQ */
+
 @media screen and (max-width:450px) {
     body {
         background-attachment: fixed;
         background-position: center;
     }
     .movie-description {
-        font-size: 0.3rem;
+        font-size: 0.75rem;
         padding: 0.25rem;
     }
     .movie {
         overflow: hidden;
-        margin: 0.4rem;
-        width: 75px;
+        margin: 0.75rem;
+        width: 80%;
         height: auto;
         background-color: rgb(88, 88, 165);
         border-radius: 3px;
@@ -438,11 +440,11 @@ overflow-y:scroll;
     }
 
     .movie-info {
-        font-size: 0.3rem;
+        font-size: 0.75rem;
         padding: 0.25rem;
     }
     .movie-name {
-        font-size: 0.5rem;
+        font-size: 0.75rem;
         padding: 0.25rem;
     }
 
@@ -467,7 +469,7 @@ overflow-y:scroll;
         text-align: center;
     }
         .title {
-            font-size: 0.75rem;
+            font-size: 1.25rem;
         }
 
         .box-title {
