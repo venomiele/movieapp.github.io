@@ -117,7 +117,7 @@ border-radius: 3px;
     width: 100%;
     display:flex;
     justify-content: space-between;
-    padding:5rem;
+    padding:3rem;
     backdrop-filter: brightness(20%);
 }
 
@@ -168,4 +168,9 @@ border-radius: 3px;
 
 h1{
     color: white;
+}
+
+.error {
+    height: 100px;
+    width: 100px;
 }
