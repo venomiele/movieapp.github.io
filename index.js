@@ -18,12 +18,19 @@ const SEARCHAPI =
     async function getMovies(url) {
         let response = await fetch(url);
         let data = await response.json();
-        showMovies(data.results);
+        console.log(data);
+        if( data.results.length < 1) {
+        title.innerHTML = `The search was not found!`;
+        title.style.color ="red";
+            container.innerHTML = `<img src="https://cdn.pixabay.com/photo/2021/01/10/20/03/laptop-5906264_960_720.png" alt="error">`
+        } else {
+            showMovies(data.results);
+        }
         }
 
     getMovies(APIURL);
     dynTitle();
-    
+
     function showMovies(movies) {
 // clear main
 container.innerHTML = '';
@@ -42,7 +49,8 @@ container.innerHTML = '';
                      <h3>Original language: <span  class="language">${movie.original_language}</span></h3>
                      <p>${movie.overview}</p>
                   </div>`
-             } else {
+                  container.appendChild(movieEl);
+            } else {
                 movieEl.innerHTML = `
                 <img src="https://image.tmdb.org/t/p/w1280/${movie.poster_path}" alt="${movie.title}">
               <div class="movie-info">
@@ -55,8 +63,9 @@ container.innerHTML = '';
                   <h3>Original language: <span  class="language">${movie.original_language}</span></h3>
                   <p>${movie.overview}</p>
                </div>`
+               container.appendChild(movieEl);
              }
-             container.appendChild(movieEl);
+
              });
              function ratingColor(vote) {
                  if(vote >= 7) {
@@ -65,6 +74,7 @@ container.innerHTML = '';
                return "red";
                  }
              }
+             return movies;
     }
 
 
@@ -78,7 +88,7 @@ form.addEventListener("submit", (e) => {
         lastSearch.push(input.value);
         getMovies(SEARCHAPI + searchFor);
         dynTitle();
-      input.value ="";
+      input.value ="";    
     }
 })
 
@@ -90,6 +100,7 @@ function dynTitle() {
 } else {
     lastItem = lastSearch.pop();
     title.innerHTML = `You have searched for <span class="colored">${lastItem}</span>`;
+    title.style.color = "white";
 }
 }
 
