@@ -119,7 +119,7 @@ border-radius: 3px;
     display:flex;
     justify-content: space-between;
     padding:3rem;
-    backdrop-filter: brightness(20%);
+    backdrop-filter: blur(5px);
 }
 
 .title {
@@ -407,6 +407,10 @@ overflow-y:scroll;
     .movie-name {
         font-size: 0.5rem;
         padding: 0.25rem;
+    }
+    .box {
+        height: auto;
+        width: 100%;
     }
 
 }
