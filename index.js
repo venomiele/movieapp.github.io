@@ -5,6 +5,8 @@ let title = document.querySelector(".title");
 let inputCounter = 0;
 let lastSearch = [];
 let lastItem = undefined;
+let appear = 0;
+let modal = document.querySelector(".modal");
 
 
 // API URLS
@@ -22,7 +24,7 @@ const SEARCHAPI =
         if( data.results.length < 1) {
         title.innerHTML = `The search was not found!`;
         title.style.color ="red";
-            container.innerHTML = `<img src="https://cdn.pixabay.com/photo/2021/01/10/20/03/laptop-5906264_960_720.png" alt="error">`
+            container.innerHTML = `<img class="error" src="https://cdn.pixabay.com/photo/2021/01/10/20/03/laptop-5906264_960_720.png" alt="error">`
         } else {
             showMovies(data.results);
         }
@@ -31,12 +33,31 @@ const SEARCHAPI =
     getMovies(APIURL);
     dynTitle();
 
+
     function showMovies(movies) {
 // clear main
 container.innerHTML = '';
         movies.forEach( movie => {
             let movieEl = document.createElement("div");
             movieEl.classList.add("movie");
+            // Backdrop path on click
+movieEl.addEventListener("click", () => {
+        modal.style.display = "block";
+           modal.innerHTML = `
+<div class="modal-content">
+<div class="box">
+<div class="box-title">
+<h2 class="h2-title">Here is another preview for the movie!</h2>
+</div>
+<div class="box-photo">
+<img class="error"src="https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}" alt="backdrop">
+</div>
+</div>
+</div>`
+setTimeout(function closed(){
+    modal.style.display ="none";
+},3000);
+    })
              if(movie.poster_path == null) {
                  movieEl.innerHTML = `<img src="https://cdn.pixabay.com/photo/2018/01/04/15/51/404-error-3060993_960_720.png" alt="${movie.title}">
                  <div class="movie-info">
@@ -45,9 +66,11 @@ container.innerHTML = '';
                  </div>
                  <div class="movie-description">
                      <h3>Overview:</h3>
-                     <h3>Release date: ${movie.release_date}</h3>
+                     <h3>Release: 
+                     ${movie.release_date}</h3>
                      <h3>Original language: <span  class="language">${movie.original_language}</span></h3>
                      <p>${movie.overview}</p>
+                     <h3>CLICK FOR PREVIEW!</h3>
                   </div>`
                   container.appendChild(movieEl);
             } else {
@@ -59,9 +82,11 @@ container.innerHTML = '';
               </div>
               <div class="movie-description">
                   <h3>Overview:</h3>
-                  <h3>Release date: ${movie.release_date}</h3>
+                  <h3>Release: 
+                  ${movie.release_date}</h3>
                   <h3>Original language: <span  class="language">${movie.original_language}</span></h3>
                   <p>${movie.overview}</p>
+                  <h3 class="preview">CLICK FOR PREVIEW!</h3>
                </div>`
                container.appendChild(movieEl);
              }
@@ -74,9 +99,10 @@ container.innerHTML = '';
                return "red";
                  }
              }
+             
              return movies;
-    }
-
+            }
+            
 
 // get searched movies movies first
 
