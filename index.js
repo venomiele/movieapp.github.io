@@ -46,11 +46,8 @@ movieEl.addEventListener("click", () => {
            modal.innerHTML = `
 <div class="modal-content">
 <div class="box">
-<div class="box-title">
-<h2 class="h2-title">Here is another preview for the movie!</h2>
-</div>
 <div class="box-photo">
-<img class="error"src="https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}" alt="backdrop">
+<img class="backdrop"src="https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}" alt="backdrop">
 </div>
 </div>
 </div>`
