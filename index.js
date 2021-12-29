@@ -1,7 +1,11 @@
 let container = document.querySelector(".container");
 let form = document.querySelector(".form-control");
 let input = document.querySelector(".input");
-let rating = document.querySelector(".rating");
+let title = document.querySelector(".title");
+let inputCounter = 0;
+let lastSearch = [];
+let lastItem = undefined;
+
 
 // API URLS
 const APIURL =
@@ -10,7 +14,7 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCHAPI =
     "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
 
-
+// Get the movies by API
     async function getMovies(url) {
         let response = await fetch(url);
         let data = await response.json();
@@ -18,8 +22,8 @@ const SEARCHAPI =
         }
 
     getMovies(APIURL);
+    dynTitle();
     
-
     function showMovies(movies) {
 // clear main
 container.innerHTML = '';
@@ -43,7 +47,7 @@ container.innerHTML = '';
                 <img src="https://image.tmdb.org/t/p/w1280/${movie.poster_path}" alt="${movie.title}">
               <div class="movie-info">
                <h3 class="movie-name">${movie.title}</h3>
-               <h2 class="rating">${movie.vote_average}</h2>  
+               <h2 class="${ratingColor(movie.vote_average)}">${movie.vote_average}</h2>  
               </div>
               <div class="movie-description">
                   <h3>Overview:</h3>
@@ -54,15 +58,14 @@ container.innerHTML = '';
              }
              container.appendChild(movieEl);
              });
+             function ratingColor(vote) {
+                 if(vote >= 7) {
+                     return "green";
+                 } else {
+               return "red";
+                 }
+             }
     }
-// ratings colors
-function ratingColor () {
-    if(movie.vote_average > 6) {
-rating.style.color = "green";
-    } else {
-        rating.style.color ="green";
-    }
-}
 
 
 // get searched movies movies first
@@ -71,7 +74,22 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let searchFor = input.value;
     if (searchFor) {
+        inputCounter++;
+        lastSearch.push(input.value);
         getMovies(SEARCHAPI + searchFor);
+        dynTitle();
       input.value ="";
     }
 })
+
+//Dynamic title
+
+function dynTitle() {
+    if(inputCounter < 1) {
+        title.innerHTML = `Popular this <span class="colored">week!</span>`
+} else {
+    lastItem = lastSearch.pop();
+    title.innerHTML = `You have searched for <span class="colored">${lastItem}</span>`;
+}
+}
+
